@@ -45,41 +45,11 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
   document.querySelectorAll('.reveal').forEach(function (el) { revealIO.observe(el); });
 
-  /* ---------- word-by-word masked headline reveals ---------- */
-  var splitIO = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        splitIO.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.25 });
-
+  /* ---------- headlines render statically (no word-split animation) ----------
+     Keeping the heading text intact (rather than splitting it into per-word
+     spans) means the gradient accent words paint reliably on mobile too. */
   document.querySelectorAll('[data-split]').forEach(function (el) {
-    if (reducedMotion) { el.classList.add('in'); return; }
-    var idx = 0;
-    function process(node) {
-      if (node.nodeType === 3) {
-        var parts = node.textContent.split(/(\s+)/);
-        var frag = document.createDocumentFragment();
-        parts.forEach(function (part) {
-          if (!part) return;
-          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
-          var w = document.createElement('span');
-          w.className = 'w';
-          var inner = document.createElement('span');
-          inner.textContent = part;
-          inner.style.setProperty('--i', idx++);
-          w.appendChild(inner);
-          frag.appendChild(w);
-        });
-        node.parentNode.replaceChild(frag, node);
-      } else if (node.nodeType === 1) {
-        Array.prototype.slice.call(node.childNodes).forEach(process);
-      }
-    }
-    Array.prototype.slice.call(el.childNodes).forEach(process);
-    splitIO.observe(el);
+    el.classList.add('in');
   });
 
   /* ---------- gentle parallax on [data-plx] ---------- */
