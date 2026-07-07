@@ -1,0 +1,13 @@
+{
+  "name": "Reclaiming Our Downtown",
+  "short_name": "Our Downtown",
+  "description": "A community movement to rebuild Downtown Santa Clara.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#faf7f2",
+  "theme_color": "#faf7f2",
+  "icons": [
+    { "src": "assets/favicon.png", "sizes": "102x102", "type": "image/png" },
+    { "src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
