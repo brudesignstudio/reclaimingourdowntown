@@ -226,6 +226,76 @@
     });
   }
 
+  /* ---------- welcome modal ----------
+     Opens once per session, right after the visitor scrolls past the
+     looping hero video. Fully dismissable: close button, backdrop, Esc,
+     or either action button. Focus is trapped while open and restored on
+     close, so it works for keyboard and screen-reader users. */
+  var modal = document.getElementById('welcomeModal');
+  // trigger just after the looping hero video scrolls out of view
+  var heroVideo = document.querySelector('.hero .video-frame') || document.getElementById('top');
+  if (modal && heroVideo) {
+    var card = modal.querySelector('.modal-card');
+    var lastFocused = null;
+    var seen = false;
+    try { seen = sessionStorage.getItem('rodWelcomeSeen') === '1'; } catch (e) {}
+
+    var focusablesIn = function (el) {
+      return Array.prototype.filter.call(
+        el.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'),
+        function (n) { return n.offsetParent !== null || n === document.activeElement; }
+      );
+    };
+
+    var onKeydown = function (e) {
+      if (e.key === 'Escape') { e.preventDefault(); closeModal(); return; }
+      if (e.key !== 'Tab') return;
+      var f = focusablesIn(card);
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+
+    var openModal = function () {
+      if (seen) return;
+      seen = true;
+      try { sessionStorage.setItem('rodWelcomeSeen', '1'); } catch (e) {}
+      lastFocused = document.activeElement;
+      modal.hidden = false;
+      document.documentElement.classList.add('modal-open');
+      document.body.classList.add('modal-open');
+      document.addEventListener('keydown', onKeydown);
+      var closeBtn = modal.querySelector('.modal-close');
+      if (closeBtn) closeBtn.focus();
+    };
+
+    function closeModal() {
+      if (modal.hidden) return;
+      modal.hidden = true;
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+      document.removeEventListener('keydown', onKeydown);
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    }
+
+    modal.querySelectorAll('[data-close]').forEach(function (el) {
+      el.addEventListener('click', function () { closeModal(); });
+    });
+
+    if (!seen) {
+      var onScrollCheck = function () {
+        // open once the looping video has scrolled up out of view
+        if (heroVideo.getBoundingClientRect().bottom < 0) {
+          window.removeEventListener('scroll', onScrollCheck);
+          openModal();
+        }
+      };
+      window.addEventListener('scroll', onScrollCheck, { passive: true });
+      onScrollCheck();
+    }
+  }
+
   /* ---------- footer year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
