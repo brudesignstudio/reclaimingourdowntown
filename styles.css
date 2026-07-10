@@ -506,6 +506,16 @@ h1 .accent,.h-lg .accent,.onesent p .accent,.foot-big .accent{
 .filters button:hover{color:var(--red);border-color:var(--red);background:var(--red-tint);}
 .filters button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff;}
 
+/* news archive: category sections */
+.cat-block{margin-bottom:clamp(52px,7vh,84px);}
+.cat-block:last-child{margin-bottom:0;}
+.cat-h{
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+  font-family:var(--font-display);font-weight:600;font-size:clamp(21px,2.3vw,28px);
+  letter-spacing:-.02em;color:var(--ink);margin:0;
+}
+.cat-h .cat-count{font-family:var(--font-label);font-weight:500;font-size:12.5px;letter-spacing:.04em;color:var(--faint);}
+
 /* ============ JOBS BAND ============ */
 .jobs-band{
   display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,5vw,72px);align-items:center;

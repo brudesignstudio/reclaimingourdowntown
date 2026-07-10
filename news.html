@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 <title>News · Reclaiming Our Downtown</title>
-<meta name="description" content="Press coverage of the movement to rebuild Downtown Santa Clara, from 2017 to today." />
+<meta name="description" content="Press coverage of the movement to rebuild Downtown Santa Clara, from 2007 to today." />
 <meta name="theme-color" content="#faf7f2" />
 <link rel="icon" type="image/png" href="assets/favicon.png" />
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -46,8 +46,8 @@
 <header class="page-hero">
   <div class="wrap">
     <p class="kicker rise"><span>In the news</span></p>
-    <h1 data-split style="margin-top:18px;">A decade of headlines. <span class="accent">One goal.</span></h1>
-    <p class="sub rise"><span>From a handful of neighbors with a petition to a plan adopted by City Council, the press has followed every step. Here's the full record, 2017 to today.</span></p>
+    <h1 data-split style="margin-top:18px;">Over a decade of headlines. <span class="accent">One goal.</span></h1>
+    <p class="sub rise"><span>From a handful of neighbors with a petition to a plan adopted by City Council, the press has followed every step. Here's the full record, 2007 to today.</span></p>
   </div>
 </header>
 
@@ -69,11 +69,10 @@
 <!-- ============ ARCHIVE ============ -->
 <section class="section tight" aria-labelledby="archive-h" style="padding-top:0;">
   <div class="wrap">
-    <div class="sec-head split">
+    <div class="sec-head">
       <h2 class="h-md reveal" id="archive-h">The full archive</h2>
-      <div class="filters reveal" id="newsFilters" role="group" aria-label="Filter news by year"></div>
     </div>
-    <div class="news-grid" id="newsList"></div>
+    <div id="newsArchive"></div>
   </div>
 </section>
 </main>
@@ -132,70 +131,136 @@
   (function () {
     var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
     var articles = [
-      { y: 2025, src: 'San José Spotlight', date: 'Mar 2025', title: 'No downtown Santa Clara, no Super Bowl dollars', tag: 'Op-ed', url: 'https://sanjosespotlight.com/op-ed-no-downtown-santa-clara-no-super-bowl-dollars/' },
-      { y: 2024, src: 'San José Spotlight', date: 'Jun 2024', title: 'Jim Nantz’s impossible quest for downtown Santa Clara', url: 'https://sanjosespotlight.com/ondrasek-jim-nantzs-impossible-quest-for-downtown-santa-clara/' },
-      { y: 2024, src: 'APA California', date: 'Oct 2024', title: 'Reviving Downtown Santa Clara: A Blueprint for Community-Led Transformation', tag: 'Honor', logo: 'apacalifornia.org', url: 'https://web.cvent.com/event/3444d461-925e-4b15-addb-3ffa4d147d91/websitePage:bdb5db6e-2d95-4c44-8203-da8debfbd3e5' },
-      { y: 2024, src: 'San José Spotlight', date: 'Jan 2024', title: 'A victory toward reclaiming Santa Clara’s downtown', win: true, url: 'https://sanjosespotlight.com/op-ed-a-victory-toward-reclaiming-santa-claras-downtown/' },
-      { y: 2023, src: 'KPIX CBS News', date: 'Dec 2023', title: 'Santa Clara leaders approve citizen-led effort to rebuild demolished downtown', win: true, url: 'https://www.cbsnews.com/sanfrancisco/news/santa-clara-downtown-leaders-approve-citizen-led-rebuilding-effort/' },
-      { y: 2023, src: 'Silicon Valley Business Journal', date: 'Dec 2023', title: 'Santa Clara approves plan for city’s new downtown', win: true, url: 'https://www.bizjournals.com/sanjose/news/2023/12/07/city-of-santa-clara-approves-downtown-plan.html' },
-      { y: 2023, src: 'San José Spotlight', date: 'Dec 2023', title: 'Santa Clara council approves plan to revive downtown', win: true, url: 'https://sanjosespotlight.com/santa-clara-city-council-approves-plan-to-revive-downtown/' },
-      { y: 2023, src: 'Mercury News', date: 'Mar 2023', title: 'Opinion: VTA is spending $500M to add 10 minutes to your commute', tag: 'Op-ed', url: 'https://www.mercurynews.com/2023/03/24/opinion-vta-is-spending-500-million-to-add-10-minutes-to-your-commute/' },
-      { y: 2022, src: 'KPIX CBS SF', date: 'Jan 2022', title: 'New movement advocates for revival of Santa Clara’s old downtown', logo: 'cbsnews.com', url: 'https://sanfrancisco.cbslocal.com/2022/01/12/new-movement-advocates-for-revival-of-santa-claras-old-downtown/' },
-      { y: 2022, src: 'Mercury News', date: 'Jan 2022', title: 'Santa Clara residents look to move City Hall back downtown', url: 'https://www.mercurynews.com/2022/01/11/santa-clara-residents-look-to-move-city-hall-back-downtown/' },
-      { y: 2021, src: 'APA California', date: '2021', title: 'Award of Merit for Grassroots Initiative', tag: 'Honor', win: true, url: 'https://www.apacalifornia.org/events/awards-program/award-winners/' },
-      { y: 2021, src: 'San José Spotlight', date: 'Oct 2021', title: 'Grassroots group to reclaim their downtown', url: 'https://sanjosespotlight.com/santa-clara-residents-want-to-reclaim-their-once-vibrant-downtown/' },
-      { y: 2020, src: 'San José Spotlight', date: 'Aug 2020', title: 'Residents seek to remove courthouse blocking Santa Clara’s future downtown', url: 'https://sanjosespotlight.com/residents-seek-to-remove-courthouse-blocking-santa-claras-future-downtown/' },
-      { y: 2019, src: 'San José Spotlight', date: 'Aug 2019', title: 'Residents rally to reclaim demolished downtown', url: 'https://sanjosespotlight.com/residents-rally-to-reclaim-demolished-downtown-santa-clara/' },
-      { y: 2018, src: 'Mercury News', date: 'Jun 2018', title: 'Opinion: Keep Santa Clara on track to restore its downtown', tag: 'Op-ed', url: 'https://www.mercurynews.com/2018/06/09/opinion-keep-santa-clara-on-track-to-restore-its-downtown/' },
-      { y: 2017, src: 'ABC7 SF News', date: 'Nov 2017', title: 'Santa Clara residents try to bring back downtown that was torn down', url: 'https://abc7news.com/santa-clara-downtown-revitalization-new/2629338/' },
-      { y: 2017, src: 'Mercury News', date: 'Apr 2017', title: 'The worst local decisions of the last 50 years', url: 'https://www.mercurynews.com/2017/04/24/the-worst-local-decisions-of-the-last-50-years/' }
+      { y: 2025, cat: 'Op-Eds', src: 'San José Spotlight', date: 'Mar 2025', title: 'No downtown Santa Clara, no Super Bowl dollars', tag: 'Op-ed', url: 'https://sanjosespotlight.com/op-ed-no-downtown-santa-clara-no-super-bowl-dollars/' },
+      { y: 2024, cat: 'Awards', src: 'APA California', date: 'Oct 2024', title: 'Reviving Downtown Santa Clara: A Blueprint for Community-Led Transformation', tag: 'Honor', logo: 'apacalifornia.org', url: 'https://web.cvent.com/event/3444d461-925e-4b15-addb-3ffa4d147d91/websitePage:bdb5db6e-2d95-4c44-8203-da8debfbd3e5' },
+      { y: 2024, cat: 'News', src: 'San José Spotlight', date: 'Jun 2024', title: 'Jim Nantz’s impossible quest for downtown Santa Clara', url: 'https://sanjosespotlight.com/ondrasek-jim-nantzs-impossible-quest-for-downtown-santa-clara/' },
+      { y: 2024, cat: 'Op-Eds', src: 'San José Spotlight', date: 'Jan 2024', title: 'A victory toward reclaiming Santa Clara’s downtown', tag: 'Op-ed', win: true, url: 'https://sanjosespotlight.com/op-ed-a-victory-toward-reclaiming-santa-claras-downtown/' },
+      { y: 2024, cat: 'Video', src: 'YouTube', date: '2024', title: 'The history of Downtown Santa Clara: from complete destruction to an American destination point', tag: 'Video', logo: 'youtube.com', url: 'https://youtu.be/OZNy9yp1ga4' },
+      { y: 2024, cat: 'Video', src: 'LinkedIn', date: '2024', title: 'Reclaiming Our Downtown: 2023 accomplishments and next actions', tag: 'Update', url: 'https://www.linkedin.com/pulse/reclaiming-our-downtown-2023-accomplishments-next-czs8c' },
+      { y: 2023, cat: 'News', src: 'KPIX CBS News', date: 'Dec 2023', title: 'Santa Clara leaders approve citizen-led effort to rebuild demolished downtown', win: true, url: 'https://www.cbsnews.com/sanfrancisco/news/santa-clara-downtown-leaders-approve-citizen-led-rebuilding-effort/' },
+      { y: 2023, cat: 'News', src: 'Silicon Valley Business Journal', date: 'Dec 2023', title: 'Santa Clara approves plan for city’s new downtown', win: true, url: 'https://www.bizjournals.com/sanjose/news/2023/12/07/city-of-santa-clara-approves-downtown-plan.html' },
+      { y: 2023, cat: 'News', src: 'San José Spotlight', date: 'Dec 2023', title: 'Santa Clara council approves plan to revive downtown', win: true, url: 'https://sanjosespotlight.com/santa-clara-city-council-approves-plan-to-revive-downtown/' },
+      { y: 2023, cat: 'Video', src: 'WRT', date: 'Dec 2023', title: 'Santa Clara’s Downtown Precise Plan, adopted', win: true, url: 'https://www.wrtdesign.com/projects/santa-clara-downtown-precise-plan' },
+      { y: 2023, cat: 'News', src: 'San José Spotlight', date: 'Aug 2023', title: 'Downtown Santa Clara development on hold', url: 'https://sanjosespotlight.com/downtown-santa-clara-development-on-hold/' },
+      { y: 2023, cat: 'Op-Eds', src: 'Mercury News', date: 'Mar 2023', title: 'Opinion: VTA is spending $500M to add 10 minutes to your commute', tag: 'Op-ed', url: 'https://www.mercurynews.com/2023/03/24/opinion-vta-is-spending-500-million-to-add-10-minutes-to-your-commute/' },
+      { y: 2023, cat: 'News', src: 'Silicon Valley Voice', date: 'Feb 2023', title: 'Mary Grizzle: call her Mrs. Downtown', url: 'https://www.svvoice.com/mary-grizzle-call-her-mrs-downtown/' },
+      { y: 2022, cat: 'News', src: 'KPIX CBS SF', date: 'Jan 2022', title: 'New movement advocates for revival of Santa Clara’s old downtown', logo: 'cbsnews.com', url: 'https://sanfrancisco.cbslocal.com/2022/01/12/new-movement-advocates-for-revival-of-santa-claras-old-downtown/' },
+      { y: 2022, cat: 'News', src: 'Mercury News', date: 'Jan 2022', title: 'Santa Clara residents look to move City Hall back downtown', url: 'https://www.mercurynews.com/2022/01/11/santa-clara-residents-look-to-move-city-hall-back-downtown/' },
+      { y: 2021, cat: 'Op-Eds', src: 'San José Spotlight', date: 'Dec 2021', title: 'Op-ed: it all comes down to City Hall', tag: 'Op-ed', url: 'https://sanjosespotlight.com/op-ed-it-all-comes-down-to-santa-clara-city-hall/' },
+      { y: 2021, cat: 'Awards', src: 'APA California', date: '2021', title: 'Award of Merit for Grassroots Initiative', tag: 'Honor', win: true, url: 'https://www.apacalifornia.org/events/awards-program/award-winners/' },
+      { y: 2021, cat: 'Awards', src: 'APA California, Northern Section', date: '2021', title: 'Award of Excellence for a Grassroots Initiative', tag: 'Honor', win: true, logo: 'norcalapa.org', url: 'https://norcalapa.org/2021/04/northern-section-2021-awards-announced/' },
+      { y: 2021, cat: 'Awards', src: 'Assembly District 25', date: 'Nov 2021', title: 'Assemblymember Alex Lee honors the unsung heroes of Assembly District 25', tag: 'Honor', win: true, logo: 'a24.asmdc.org', url: 'https://a24.asmdc.org/press-releases/20211122-assemblymember-alex-lee-honors-unsung-heroes-assembly-district-25' },
+      { y: 2021, cat: 'News', src: 'Epoch Times', date: 'Nov 2021', title: 'Chinese-language press coverage of Reclaiming Our Downtown', url: 'https://www.epochtimes.com/gb/21/11/1/n13344249.htm' },
+      { y: 2021, cat: 'News', src: 'iHeart / KFBK', date: 'Nov 2021', title: 'Santa Clara named a top boomtown in the U.S.', logo: 'kfbk.iheart.com', url: 'https://kfbk.iheart.com/content/2021-11-04-4-california-cities-among-top-boomtowns-in-the-us/' },
+      { y: 2021, cat: 'News', src: 'San José Spotlight', date: 'Oct 2021', title: 'Grassroots group to reclaim their downtown', url: 'https://sanjosespotlight.com/santa-clara-residents-want-to-reclaim-their-once-vibrant-downtown/' },
+      { y: 2021, cat: 'Video', src: 'Santa Clara Living', date: 'Mar 2021', title: 'Video: Downtown Santa Clara — past, present, and future', tag: 'Video', logo: 'youtube.com', url: 'https://youtu.be/fkXsAQ0tL5Y' },
+      { y: 2020, cat: 'Op-Eds', src: 'San José Spotlight', date: 'Sep 2020', title: 'Opinion: for hope after COVID-19, take a look at history', tag: 'Op-ed', url: 'https://sanjosespotlight.com/ondrasek-and-west-for-hope-after-covid-19-take-a-look-at-history/' },
+      { y: 2020, cat: 'News', src: 'San José Spotlight', date: 'Aug 2020', title: 'Residents seek to remove courthouse blocking Santa Clara’s future downtown', url: 'https://sanjosespotlight.com/residents-seek-to-remove-courthouse-blocking-santa-claras-future-downtown/' },
+      { y: 2020, cat: 'Awards', src: 'Mercury News', date: 'Jun 2020', title: 'Best of Silicon Valley 2020: runner-up for Best Facebook Group', tag: 'Honor', url: 'https://mercurynews-ca.newsmemory.com/?special=Best+of+Silicon+Valley' },
+      { y: 2020, cat: 'News', src: 'San José Spotlight', date: 'Jan 2020', title: 'Santa Clara leaders set slew of priorities for 2020', url: 'https://sanjosespotlight.com/santa-clara-set-slew-of-priorities-for-2020/' },
+      { y: 2019, cat: 'News', src: 'San José Spotlight', date: 'Aug 2019', title: 'Residents rally to reclaim demolished downtown', url: 'https://sanjosespotlight.com/residents-rally-to-reclaim-demolished-downtown-santa-clara/' },
+      { y: 2018, cat: 'Video', src: 'City of Santa Clara', date: 'Dec 2018', title: 'Downtown Precise Plan and Community Task Force monthly meetings begin', tag: 'Resource', url: 'https://www.santaclaraca.gov/our-city/departments-a-f/community-development/planning-division/specific-plans/downtown-precise-plan' },
+      { y: 2018, cat: 'Video', src: 'Anthropology News', date: 'Nov 2018', title: 'Affective landscapes of the past and present in Santa Clara', tag: 'Academic', logo: 'anthropology-news.org', url: 'https://www.anthropology-news.org/articles/affective-landscapes-of-the-past-and-present-in-santa-clara/' },
+      { y: 2018, cat: 'Op-Eds', src: 'Mercury News', date: 'Jun 2018', title: 'Opinion: Keep Santa Clara on track to restore its downtown', tag: 'Op-ed', url: 'https://www.mercurynews.com/2018/06/09/opinion-keep-santa-clara-on-track-to-restore-its-downtown/' },
+      { y: 2017, cat: 'News', src: 'Silicon Valley Voice', date: 'Nov 2017', title: 'The history of Santa Clara’s downtown', url: 'https://www.svvoice.com/the-history-of-santa-claras-downtown/' },
+      { y: 2017, cat: 'News', src: 'ABC7 SF News', date: 'Nov 2017', title: 'Santa Clara residents try to bring back downtown that was torn down', url: 'https://abc7news.com/santa-clara-downtown-revitalization-new/2629338/' },
+      { y: 2017, cat: 'Video', src: 'KPIX', date: 'Jul 2017', title: 'New movement to build old Downtown Santa Clara', tag: 'Video', logo: 'youtube.com', url: 'https://youtu.be/MZ8KCjESmJc' },
+      { y: 2017, cat: 'News', src: 'Mercury News', date: 'May 2017', title: 'Trying to restore its glory: Santa Clara downtown', url: 'https://www.mercurynews.com/2017/05/24/santa-clara-downtown-can-it-be-restored/' },
+      { y: 2017, cat: 'News', src: 'Mercury News', date: 'Apr 2017', title: 'The worst local decisions of the last 50 years', url: 'https://www.mercurynews.com/2017/04/24/the-worst-local-decisions-of-the-last-50-years/' },
+      { y: 2017, cat: 'Video', src: 'Wikipedia', date: '2017', title: 'Santa Clara, CA — downtown urban renewal history, updated', tag: 'Resource', url: 'https://en.wikipedia.org/wiki/Santa_Clara,_California' },
+      { y: 2017, cat: 'Video', src: 'Historypin', date: 'Archive', title: 'Map: historic Downtown Santa Clara, with historic photos', tag: 'Resource', url: 'https://www.historypin.org/en/historic-downtown-santa-clara-ca/geo/37.349392,-121.945451,11/bounds/37.205423,-122.09331,37.493085,-121.797592/paging/1' },
+      { y: 2017, cat: 'Video', src: 'Calisphere', date: 'Archive', title: 'Historic Plaza Park: bandstand and gazebo collection', tag: 'Resource', url: 'https://calisphere.org/item/ark:/13030/kt2k4017jg/' },
+      { y: 2017, cat: 'Video', src: 'History San José', date: 'Archive', title: 'Historic Plaza Park bandstand, photo archive', tag: 'Resource', logo: 'historysanjose.pastperfectonline.com', url: 'https://historysanjose.pastperfectonline.com/photo/7DB29570-3708-4D64-A19E-570541465858' },
+      { y: 2013, cat: 'Video', src: 'Common Sense Community Design', date: 'Feb 2013', title: 'Downtown Mountain View: secrets of success, one city’s experience', tag: 'Resource', logo: 'bruceliedstrand.blogspot.com', url: 'http://bruceliedstrand.blogspot.com/2013/02/downtown-mountain-view-secrets-of.html' },
+      { y: 2007, cat: 'News', src: 'Santa Clara Weekly', date: 'Jan 2007', title: 'Downtown: why there’s no there, there', url: 'https://www.svvoice.com/the-history-of-santa-claras-downtown/' }
     ];
 
-    var list = document.getElementById('newsList');
-    var fb = document.getElementById('newsFilters');
-    var years = articles.map(function (a) { return a.y; }).filter(function (y, i, arr) { return arr.indexOf(y) === i; }).sort(function (a, b) { return b - a; });
-    var tabsData = ['All', 'Milestones'].concat(years);
+    var CATS = [
+      { key: 'News', label: 'News' },
+      { key: 'Op-Eds', label: 'Op-Eds' },
+      { key: 'Awards', label: 'Awards & Recognition' },
+      { key: 'Video', label: 'Video & Resources' }
+    ];
 
-    function render(f) {
-      list.innerHTML = '';
-      var items = articles.filter(function (a) {
-        if (f === 'All') return true;
-        if (f === 'Milestones') return a.win;
-        return a.y === f;
-      });
-      items.forEach(function (a, i) {
-        var el = document.createElement('a');
-        el.className = 'ncard reveal in';
-        el.href = a.url; el.target = '_blank'; el.rel = 'noopener noreferrer';
-        var tag = a.win ? '<span class="tagL win">Milestone</span>' : (a.tag ? '<span class="tagL">' + a.tag + '</span>' : '<span></span>');
-        var logoDomain = a.logo || new URL(a.url).hostname;
-        el.innerHTML =
-          '<div class="ntop"><span class="src"><img class="src-logo" src="https://www.google.com/s2/favicons?domain=' + logoDomain + '&sz=64" alt="" onerror="this.style.display=\'none\'" />' + a.src + '</span><span class="date">' + a.date + '</span></div>' +
-          '<h3>' + a.title + '</h3>' +
-          '<div class="nfoot">' + tag + '<span class="go" aria-hidden="true">' + arrow + '</span></div>';
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(18px)';
-        list.appendChild(el);
-        setTimeout(function () {
-          el.style.transition = 'opacity .5s ease ' + (i * 45) + 'ms, transform .5s cubic-bezier(.16,1,.3,1) ' + (i * 45) + 'ms';
-          el.style.opacity = '1';
-          el.style.transform = 'none';
-        }, 20);
-      });
+    var root = document.getElementById('newsArchive');
+
+    function slug(key) { return 'cat-' + key.toLowerCase().replace(/[^a-z]+/g, ''); }
+
+    function makeCard(a, i) {
+      var el = document.createElement('a');
+      el.className = 'ncard reveal in';
+      el.href = a.url; el.target = '_blank'; el.rel = 'noopener noreferrer';
+      var tag = a.win ? '<span class="tagL win">Milestone</span>' : (a.tag ? '<span class="tagL">' + a.tag + '</span>' : '<span></span>');
+      var logoDomain = a.logo || new URL(a.url).hostname;
+      el.innerHTML =
+        '<div class="ntop"><span class="src"><img class="src-logo" src="https://www.google.com/s2/favicons?domain=' + logoDomain + '&sz=64" alt="" onerror="this.style.display=\'none\'" />' + a.src + '</span><span class="date">' + a.date + '</span></div>' +
+        '<h3>' + a.title + '</h3>' +
+        '<div class="nfoot">' + tag + '<span class="go" aria-hidden="true">' + arrow + '</span></div>';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      setTimeout(function () {
+        el.style.transition = 'opacity .5s ease ' + (i * 45) + 'ms, transform .5s cubic-bezier(.16,1,.3,1) ' + (i * 45) + 'ms';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }, 20);
+      return el;
     }
 
-    tabsData.forEach(function (label, i) {
-      var b = document.createElement('button');
-      b.textContent = label;
-      b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
-      b.addEventListener('click', function () {
-        fb.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
-        b.setAttribute('aria-pressed', 'true');
-        render(label);
+    CATS.forEach(function (c) {
+      var items = articles.filter(function (a) { return a.cat === c.key; });
+      if (!items.length) return;
+
+      var id = slug(c.key);
+      var block = document.createElement('div');
+      block.className = 'cat-block';
+      block.id = id;
+
+      var head = document.createElement('div');
+      head.className = 'sec-head split';
+      var h = document.createElement('h3');
+      h.className = 'cat-h';
+      h.innerHTML = c.label + ' <span class="cat-count">' + items.length + '</span>';
+      var filterWrap = document.createElement('div');
+      filterWrap.className = 'filters';
+      filterWrap.setAttribute('role', 'group');
+      filterWrap.setAttribute('aria-label', 'Filter ' + c.label + ' by year');
+      head.appendChild(h);
+      head.appendChild(filterWrap);
+      block.appendChild(head);
+
+      var grid = document.createElement('div');
+      grid.className = 'news-grid';
+      block.appendChild(grid);
+
+      var years = items.map(function (a) { return a.y; }).filter(function (y, i, arr) { return arr.indexOf(y) === i; }).sort(function (a, b) { return b - a; });
+      var hasMilestones = items.some(function (a) { return a.win; });
+      var tabsData = (hasMilestones ? ['Milestones'] : []).concat(years);
+      var initial = tabsData[0];
+
+      function renderGrid(f) {
+        grid.innerHTML = '';
+        var filtered = items.filter(function (a) {
+          if (f === 'Milestones') return a.win;
+          return a.y === f;
+        });
+        filtered.forEach(function (a, i) { grid.appendChild(makeCard(a, i)); });
+      }
+
+      tabsData.forEach(function (label) {
+        var b = document.createElement('button');
+        b.textContent = label;
+        b.setAttribute('aria-pressed', label === initial ? 'true' : 'false');
+        b.addEventListener('click', function () {
+          filterWrap.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          b.setAttribute('aria-pressed', 'true');
+          renderGrid(label);
+        });
+        filterWrap.appendChild(b);
       });
-      fb.appendChild(b);
+
+      renderGrid(initial);
+      root.appendChild(block);
     });
-    render('All');
   })();
 </script>
 </body>
