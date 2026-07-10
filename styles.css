@@ -534,6 +534,7 @@ h1 .accent,.h-lg .accent,.onesent p .accent,.foot-big .accent{
 .jobs-band .jnum small{
   font-size:.24em;font-weight:500;display:block;margin-top:14px;
   font-family:var(--font-label);text-transform:uppercase;letter-spacing:.26em;color:rgba(255,255,255,.85);
+  white-space:normal;max-width:16ch;
 }
 .jobs-band .jcopy{display:flex;flex-direction:column;gap:14px;}
 .jobs-band .jcopy .kicker{color:#ffd9b0;}
