@@ -220,9 +220,63 @@
         return;
       }
       err.classList.remove('show'); err.textContent = '';
-      var name = (form.querySelector('[name=name]').value.trim().split(' ')[0]) || 'friend';
+
+      // Mailchimp's phone merge field expects three separate parts (area/prefix/line).
+      var digits = (document.getElementById('f-phone').value || '').replace(/\D/g, '');
+      document.getElementById('f-phone-area').value = digits.slice(0, 3);
+      document.getElementById('f-phone-detail1').value = digits.slice(3, 6);
+      document.getElementById('f-phone-detail2').value = digits.slice(6, 10);
+
+      var name = form.querySelector('[name=FNAME]').value.trim() || 'friend';
       ok.textContent = 'Thanks, ' + name + ', you are on the list.';
+
+      // Real submit to Mailchimp via the hidden iframe target (bypasses this
+      // listener since HTMLFormElement.submit() doesn't fire a submit event).
+      HTMLFormElement.prototype.submit.call(form);
+
       form.reset(); newCaptcha();
+    });
+  }
+
+  /* ---------- memories form (Web3Forms, emails Bru Design Studio) ---------- */
+  var memoryForm = document.getElementById('memoryForm');
+  if (memoryForm) {
+    var memoryErr = document.getElementById('memoryErr');
+    var memoryOk = document.getElementById('memoryOk');
+    var memorySubmitBtn = memoryForm.querySelector('button[type=submit]');
+
+    memoryForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!memoryForm.checkValidity()) { memoryForm.reportValidity(); return; }
+
+      memoryErr.classList.remove('show'); memoryErr.textContent = '';
+      memorySubmitBtn.disabled = true;
+      var originalLabel = memorySubmitBtn.innerHTML;
+      memorySubmitBtn.innerHTML = 'Sending...';
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(memoryForm),
+        headers: { Accept: 'application/json' }
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          memorySubmitBtn.disabled = false;
+          memorySubmitBtn.innerHTML = originalLabel;
+          if (data.success) {
+            memoryOk.textContent = 'Thank you — your memory has been sent to the archive.';
+            memoryForm.reset();
+          } else {
+            memoryErr.textContent = data.message || 'Something went wrong sending that. Please try again.';
+            memoryErr.classList.add('show');
+          }
+        })
+        .catch(function () {
+          memorySubmitBtn.disabled = false;
+          memorySubmitBtn.innerHTML = originalLabel;
+          memoryErr.textContent = 'Something went wrong sending that. Please try again.';
+          memoryErr.classList.add('show');
+        });
     });
   }
 

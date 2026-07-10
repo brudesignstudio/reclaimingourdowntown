@@ -247,24 +247,28 @@
       <p class="kicker reveal">Add your name</p>
       <h2 class="h-lg" id="join-h" data-split>Be part of bringing it home.</h2>
       <p class="sub reveal" data-delay="1">It starts with citizens and voters. Leave your name and we'll keep you posted on meetings, plans, and the moments where your voice makes the difference.</p>
-      <!-- FORM HOOKUP: point this at Formspree / Netlify Forms / your list to collect real signups. -->
-      <form class="form reveal" data-delay="2" id="joinForm" novalidate>
+      <!-- Hooked up to Mailchimp (list: Members & Core Team Reclaim Our Downtown). Posts via hidden iframe so the page never navigates away. -->
+      <form class="form reveal" data-delay="2" id="joinForm" novalidate
+            action="https://115.us20.list-manage.com/subscribe/post?u=abbb78e0527b3e7deb2477745&amp;id=b83c9bd043&amp;f_id=00070eeef0"
+            method="post" target="mc-hidden-iframe" name="mc-embedded-subscribe-form">
         <div class="row">
-          <label class="sr-only" for="f-name">Your name</label>
-          <input id="f-name" type="text" name="name" placeholder="Your name" autocomplete="name" required />
-          <label class="sr-only" for="f-email">Your email address</label>
-          <input id="f-email" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+          <label class="sr-only" for="f-fname">Your first name</label>
+          <input id="f-fname" type="text" name="FNAME" placeholder="First name" autocomplete="given-name" required />
+          <label class="sr-only" for="f-lname">Your last name</label>
+          <input id="f-lname" type="text" name="LNAME" placeholder="Last name" autocomplete="family-name" required />
         </div>
         <div class="row">
+          <label class="sr-only" for="f-email">Your email address</label>
+          <input id="f-email" type="email" name="EMAIL" placeholder="you@email.com" autocomplete="email" required />
           <label class="sr-only" for="f-phone">Your phone number</label>
-          <input id="f-phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel" />
+          <input id="f-phone" type="tel" name="PHONE_display" placeholder="Phone number" autocomplete="tel" />
         </div>
         <div class="captcha">
           <label for="f-vote">Do you vote in Santa Clara?</label>
-          <select id="f-vote" name="vote" required>
+          <select id="f-vote" name="MMERGE3" required>
             <option value="" disabled selected>Choose one</option>
-            <option value="yes">Yes, I vote in Santa Clara</option>
-            <option value="no">No, I'm joining from nearby</option>
+            <option value="Yes, I vote in Santa Clara">Yes, I vote in Santa Clara</option>
+            <option value="No, I'm joining from nearby">No, I'm joining from nearby</option>
           </select>
         </div>
         <p class="vote-note">Don't vote here? Please join anyway — this downtown will be a destination point for the whole Bay Area!</p>
@@ -273,9 +277,18 @@
           <input id="f-captcha" type="text" inputmode="numeric" autocomplete="off" placeholder="Answer" aria-describedby="captchaErr" required />
         </div>
         <p class="form-err" id="captchaErr" role="alert"></p>
+        <!-- Split phone inputs Mailchimp expects; populated from the single visible field above at submit time. -->
+        <input type="hidden" name="PHONE[area]" id="f-phone-area" />
+        <input type="hidden" name="PHONE[detail1]" id="f-phone-detail1" />
+        <input type="hidden" name="PHONE[detail2]" id="f-phone-detail2" />
+        <!-- Mailchimp anti-bot honeypot: must stay empty and hidden from real visitors. -->
+        <div style="position:absolute;left:-5000px" aria-hidden="true">
+          <input type="text" name="b_abbb78e0527b3e7deb2477745_b83c9bd043" tabindex="-1" value="" />
+        </div>
         <button class="btn" type="submit">Count me in <span class="arr">&rarr;</span></button>
         <p class="form-ok" id="formOk" role="status" aria-live="polite"></p>
       </form>
+      <iframe name="mc-hidden-iframe" title="Mailchimp signup submission" aria-hidden="true" style="display:none"></iframe>
     </div>
   </div>
 </section>

@@ -169,8 +169,32 @@
         <p class="kicker" id="share-h">Add to the archive</p>
         <h2 class="h-md" data-split style="margin:10px 0 12px;">Have a memory of the old downtown?</h2>
         <p>A photo in a shoebox, a home movie, a story a grandparent told — every piece helps the whole city remember what it's fighting for. Send us what you have and we'll help preserve it here, credited to you.</p>
-        <div class="hero-actions" style="margin-top:22px;">
-          <a href="mailto:info@reclaimingourdowntown.com?subject=A%20memory%20for%20the%20archive" class="btn">Share a memory <span class="arr">&rarr;</span></a>
+        <!-- Submissions are emailed to Bru Design Studio via Web3Forms. -->
+        <form class="form reveal" data-delay="2" id="memoryForm" novalidate enctype="multipart/form-data">
+          <input type="hidden" name="access_key" value="95a1e482-80d4-4b5f-8bd0-ab8797ce8946" />
+          <input type="hidden" name="subject" value="A memory for the Reclaiming Our Downtown archive" />
+          <input type="hidden" name="from_name" value="Reclaiming Our Downtown — Memories form" />
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="row">
+            <label class="sr-only" for="mem-name">Your name</label>
+            <input id="mem-name" type="text" name="name" placeholder="Your name" autocomplete="name" required />
+            <label class="sr-only" for="mem-email">Your email address</label>
+            <input id="mem-email" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+          </div>
+          <label class="sr-only" for="mem-phone">Your phone number</label>
+          <input id="mem-phone" type="tel" name="phone" placeholder="Phone number" autocomplete="tel" />
+          <label class="sr-only" for="mem-story">Your memory or story</label>
+          <textarea id="mem-story" name="message" placeholder="Tell us the story behind what you're sharing..." required></textarea>
+          <div class="file-field">
+            <label for="mem-files">Attach photos, PDFs, audio, or video</label>
+            <input id="mem-files" type="file" name="attachment[]" multiple accept="image/*,.pdf,.mp3,.mp4" />
+            <p class="file-hint">Images, PDFs, MP3, or MP4. Keep it under ~10MB total — for larger home movies, share a Google Drive or Dropbox link in the story field instead.</p>
+          </div>
+          <p class="form-err" id="memoryErr" role="alert"></p>
+          <button class="btn" type="submit">Share your memory <span class="arr">&rarr;</span></button>
+          <p class="form-ok" id="memoryOk" role="status" aria-live="polite"></p>
+        </form>
+        <div class="hero-actions" style="margin-top:14px;">
           <a href="get-involved.html" class="btn ghost">More ways to help</a>
         </div>
       </div>
