@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=20260707c" />
+<link rel="stylesheet" href="styles.css?v=20260709d" />
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -67,21 +67,28 @@
   <div class="wrap">
     <h2 class="sr-only" id="mem-grid-h">The archive</h2>
 
-    <!-- Memory cards live in this grid. It stays hidden while empty. -->
-    <div class="mem-grid reveal" id="memGrid" hidden>
-      <!-- Paste one <figure class="mem-card"> per memory here.
-           Copy a block from the CARD TEMPLATE LIBRARY at the bottom of this section. -->
-    </div>
+    <!-- Memory cards live in this grid. -->
+    <div class="mem-grid reveal" id="memGrid">
+      <figure class="mem-card">
+        <div class="mem-media"><img src="assets/memories-cover.png" alt="A parade passing Toledo's Central Market on Franklin Street, with City Hall in the background" loading="lazy" /></div>
+        <figcaption class="mem-body">
+          <div class="mem-top">
+            <span class="mem-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg>Photograph</span>
+            <span class="mem-date">1919&ndash;1963</span>
+          </div>
+          <h3>Toledo's Market (The Red and White Market) 1919-1963</h3>
+          <p class="mem-cap">The site of Toledo's Market first housed the Santa Clara Coffee Club, which opened June 25, 1903. The Red and White Central Market opened at the site on August 22, 1919. Anthony Toledo went to work there in 1926, and when Frank Sallows died in 1928, Toledo bought the business and operated it under the name Toledo's Red and White Market until 1963, when it was demolished for urban renewal.<span class="by">&mdash; Courtesy of Margot Warburton</span></p>
+        </figcaption>
+      </figure>
 
-    <!-- Empty state — delete this whole block once the first memory is published. -->
-    <div class="mem-empty reveal">
-      <div class="mem-empty-cover"><img src="assets/memories-cover.png" alt="Downtown Santa Clara — City Hall, Toledo's Central Market, and a gathering on Franklin Street" loading="lazy" /></div>
-      <div class="mem-empty-body">
-        <span class="mem-empty-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 7l1.4 12a2 2 0 0 0 2 1.8h9.2a2 2 0 0 0 2-1.8L20 7M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg></span>
-        <h3>The archive is being assembled.</h3>
-        <p>The first photographs, films, recordings, and clippings are on their way in. Check back soon — or help fill these shelves with a memory of your own.</p>
-        <a href="mailto:info@reclaimingourdowntown.com?subject=A%20memory%20for%20the%20archive" class="btn">Contribute a memory <span class="arr">&rarr;</span></a>
-      </div>
+      <figure class="mem-card cta">
+        <figcaption class="mem-body">
+          <span class="mem-tag">Add to the archive</span>
+          <h3>Have a memory of your own?</h3>
+          <p>A photo, a film, a recording, a clipping — every piece helps tell the whole story.</p>
+          <a href="#share-h" class="btn ghost">Contribute a memory <span class="arr">&rarr;</span></a>
+        </figcaption>
+      </figure>
     </div>
 
     <!-- ============================================================
@@ -164,7 +171,7 @@
 <!-- ============ SHARE YOUR MEMORY ============ -->
 <section class="section tight" aria-labelledby="share-h">
   <div class="wrap">
-    <div class="jobs-band reveal">
+    <div class="jobs-band solo reveal">
       <div class="jcopy">
         <p class="kicker" id="share-h">Add to the archive</p>
         <h2 class="h-md" data-split style="margin:10px 0 12px;">Have a memory of the old downtown?</h2>
@@ -268,6 +275,6 @@
   </div>
 </footer>
 
-<script src="site.js?v=20260707"></script>
+<script src="site.js?v=20260709"></script>
 </body>
 </html>
