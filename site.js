@@ -223,10 +223,16 @@
       if (last) out += '-' + last;
       return out;
     };
+    var placeCaret = function () {
+      // while the area code is incomplete, the caret sits inside the "()"
+      // (just before the closing paren) so new digits get pushed out through it
+      var len = phoneInput.value.length;
+      var pos = phoneDigits.slice(0, 3).length < 3 ? len - 1 : len;
+      phoneInput.setSelectionRange(pos, pos);
+    };
     var renderPhone = function () {
       phoneInput.value = formatPhone(phoneDigits);
-      var len = phoneInput.value.length;
-      phoneInput.setSelectionRange(len, len);
+      placeCaret();
     };
     if (phoneInput) {
       renderPhone();
@@ -252,12 +258,10 @@
         phoneDigits = pasted.slice(0, 10);
         renderPhone();
       });
-      // cursor always sits at the end, so the prefix can never be typed into
+      // caret always snaps back to the correct insertion point, so the
+      // prefix and the "()" skeleton can never be typed into directly
       ['click', 'focus', 'keyup'].forEach(function (evt) {
-        phoneInput.addEventListener(evt, function () {
-          var len = phoneInput.value.length;
-          phoneInput.setSelectionRange(len, len);
-        });
+        phoneInput.addEventListener(evt, placeCaret);
       });
     }
 
