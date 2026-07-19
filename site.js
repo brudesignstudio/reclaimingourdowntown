@@ -210,6 +210,57 @@
       qEl.textContent = a + ' + ' + b;
     };
     newCaptcha();
+
+    /* ---------- phone input mask: +1 (xxx) xxx-xxxx ---------- */
+    var phoneInput = document.getElementById('f-phone');
+    var phoneDigits = '';
+    var formatPhone = function (digits) {
+      var area = digits.slice(0, 3);
+      var mid = digits.slice(3, 6);
+      var last = digits.slice(6, 10);
+      var out = '+1 (' + area + ')';
+      if (mid) out += ' ' + mid;
+      if (last) out += '-' + last;
+      return out;
+    };
+    var renderPhone = function () {
+      phoneInput.value = formatPhone(phoneDigits);
+      var len = phoneInput.value.length;
+      phoneInput.setSelectionRange(len, len);
+    };
+    if (phoneInput) {
+      renderPhone();
+      phoneInput.addEventListener('keydown', function (e) {
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        if (e.key === 'Backspace' || e.key === 'Delete') {
+          e.preventDefault();
+          phoneDigits = phoneDigits.slice(0, -1);
+          renderPhone();
+        } else if (/^[0-9]$/.test(e.key)) {
+          e.preventDefault();
+          if (phoneDigits.length < 10) phoneDigits += e.key;
+          renderPhone();
+        } else if (e.key.length === 1) {
+          // block any other typed character, including edits to the "+1 (" prefix
+          e.preventDefault();
+        }
+      });
+      phoneInput.addEventListener('paste', function (e) {
+        e.preventDefault();
+        var pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+        if (pasted.length === 11 && pasted[0] === '1') pasted = pasted.slice(1);
+        phoneDigits = pasted.slice(0, 10);
+        renderPhone();
+      });
+      // cursor always sits at the end, so the prefix can never be typed into
+      ['click', 'focus', 'keyup'].forEach(function (evt) {
+        phoneInput.addEventListener(evt, function () {
+          var len = phoneInput.value.length;
+          phoneInput.setSelectionRange(len, len);
+        });
+      });
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -222,10 +273,9 @@
       err.classList.remove('show'); err.textContent = '';
 
       // Mailchimp's phone merge field expects three separate parts (area/prefix/line).
-      var digits = (document.getElementById('f-phone').value || '').replace(/\D/g, '');
-      document.getElementById('f-phone-area').value = digits.slice(0, 3);
-      document.getElementById('f-phone-detail1').value = digits.slice(3, 6);
-      document.getElementById('f-phone-detail2').value = digits.slice(6, 10);
+      document.getElementById('f-phone-area').value = phoneDigits.slice(0, 3);
+      document.getElementById('f-phone-detail1').value = phoneDigits.slice(3, 6);
+      document.getElementById('f-phone-detail2').value = phoneDigits.slice(6, 10);
 
       var name = form.querySelector('[name=FNAME]').value.trim() || 'friend';
       ok.textContent = 'Thanks, ' + name + ', you are on the list.';
@@ -235,6 +285,7 @@
       HTMLFormElement.prototype.submit.call(form);
 
       form.reset(); newCaptcha();
+      phoneDigits = ''; if (phoneInput) renderPhone();
     });
   }
 
